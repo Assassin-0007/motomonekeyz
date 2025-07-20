@@ -177,25 +177,33 @@
   .navbar nav a { margin: 0 1.25rem; font-weight: 700; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 1.08rem; letter-spacing: 1.1px; text-transform: uppercase; color: var(--text-light); transition: color 0.18s;}
   .navbar nav a:hover { color: var(--main-red);}
   .hero { min-height: 430px; display: flex; align-items: center; justify-content: flex-start; border-radius: 13px; box-shadow: 0 6px 30px #e1060044; margin: 36px 0 56px; position: relative; overflow: hidden;}
-  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,#070606 78%,rgba(0,0,0,0) 100%); opacity: 0.07; z-index: 1;}
+  .hero::before { content: ''; position: absolute; inset: 0; ; opacity: 0.07; z-index: 1;}
   .hero-content { position: relative; z-index: 2; padding: 3.2rem 1rem 2rem 3.4rem; max-width: 550px;}
-  .hero-content h1 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 2.85rem; color: var(--main-red); margin-bottom: 1.13rem; font-weight: 900; letter-spacing: 2.1px; text-transform: uppercase;}
+  .hero-content h1 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 2.85rem; color: #dc82df; margin-bottom: 1.13rem; font-weight: 900; letter-spacing: 2.1px; text-transform: uppercase;}
   .hero-content p { color: var(--text-light); font-family: 'Open Sans', Arial, sans-serif; font-size: 1.23rem; line-height: 1.6; margin-bottom: 2rem; font-weight: 400;}
-  .cta-btn { background: var(--main-red); color: var(--text-light); font-family: 'Montserrat', 'Segoe UI', sans-serif; padding: 1rem 2.5rem; font-weight: 700; border-radius: 6px; border: none; font-size: 1.15rem; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; box-shadow: 0 2px 14px #e1060040; transition: background 0.16s;}
+  .cta-btn { background: #9c31ab; color: var(--text-light); font-family: 'Montserrat', 'Segoe UI', sans-serif; padding: 1rem 2.5rem; font-weight: 700; border-radius: 6px; border: none; font-size: 1.15rem; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; box-shadow: 0 2px 14px #e1060040; transition: background 0.16s;}
   .cta-btn:hover { background: #ff1a1a;}
-  .service-grid { display: grid; gap: 2.15rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));}
+  .service-grid { display: grid; gap: 2.15rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));opacity: 0.8;}
   .service-card { border-radius: 13px; box-shadow: 0 2px 16px #e1060033; text-align: left; padding: 2.1rem 1.3rem 1.43rem; position: relative; background-size: cover; background-position: center; color: #fff; overflow: hidden;}
-  .service-card::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.52); z-index: 0; transition: background 0.3s;}
+ .service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52); /* Increased from 0.52 to 0.72 to make image less visible */
+  z-index: 0;
+  transition: background 0.3s, opacity 0.2s;
+}
+
   .service-card:hover { box-shadow: 0 18px 45px #e1060061; transform: translateY(-7px) scale(1.045); z-index: 2;}
   .service-card:hover::before { background: rgba(225,6,0,0.38);}
   .service-card > * { position: relative; z-index: 1;}
   .service-card i {  color: var(--main-red); border-radius: 50%; font-size: 2.5rem; padding: 16px; display: block; margin-bottom: 1.03em; box-shadow: 0 2px 8px #e1060017; transition: background 0.18s;}
   .service-card h3 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: #fff; font-size: 1.18rem; margin-bottom: .5em; font-weight: 700; text-shadow: 0 2px 8px #0009;}
   .service-card p { color: #f2f2f2; font-size: 0.99rem; line-height: 1.48; font-family: 'Open Sans', Arial, sans-serif; text-shadow: 0 2px 8px #0007;}
-  .services { margin: 64px 0 54px; text-align: left;}
-  .services h2 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: var(--main-red); font-size: 2.13rem; margin-bottom: 2.7rem; font-weight: 900; letter-spacing: 0.9px; text-transform: uppercase; border-bottom: 2.7px solid #302f2f; display: inline-block; padding-bottom: 0.16em;}
+  .services { margin: 64px 0 54px; text-align: left; opacity: 0.12;}
+  .services h2 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: white; font-size: 2.13rem; margin-bottom: 2.7rem; font-weight: 900; letter-spacing: 0.9px; text-transform: uppercase; border-bottom: 2.7px solid #720e9e; display: inline-block; padding-bottom: 0.16em;}
   .about, .why-choose-us { margin: 52px 0; border-radius: 11px; padding: 2rem 1.4rem; box-shadow: 0 1px 12px #e1060022;}
-  .section-title { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: var(--main-red); font-size: 1.72rem; font-weight: 900; text-transform: uppercase; border-left: 5px solid var(--main-red); padding-left: 0.72em; margin-bottom: 0.44em; letter-spacing: 0.2px;}
+  .section-title { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: #dc82df; font-size: 1.72rem; font-weight: 900; text-transform: uppercase; border-left: 5px solid var(--main-red); padding-left: 0.72em; margin-bottom: 0.44em; letter-spacing: 0.2px;}
   .about p, .why-choose-us ul { font-size: 1.07rem; color: #e6e6e6; font-family: 'Open Sans', Arial, sans-serif;}
   .why-choose-us ul { padding-left: 1.3em; }
   .why-choose-us li { margin: 0.36em 0; }
@@ -256,7 +264,7 @@
   <!-- SERVICES -->
   <section class="services container" id="services">
     <h2>Featured Services</h2>
-    <div class="service-grid">
+    <div class="service-grid"">
       <div class="service-card" style="background-image:url('https://i.ibb.co/xtSqPfLY/download.jpg')">
         <i class="fa fa-car"></i>
         <h3>New Cars</h3>
@@ -277,7 +285,7 @@
         <h3>Customization</h3>
         <p>Personalize your ride with performance upgrades and luxury accessories, fitted by specialists.</p>
       </div>
-      <div class="service-card" style="background-image:url('https://i.ibb.co/tpYvv5nT/download-4.jpg')">
+      <div class="service-card" style="background-image:url('https://i.ibb.co/tpYvv5nT/download-4.jpg');">
         <i class="fa fa-star"></i>
         <h3>Elite Detailing</h3>
         <p>Pamper your car with our professional detailing and care solutions for a showroom finish every day.</p>
@@ -439,5 +447,266 @@
       }
     };
   </script>
+  <!-- Policy Modals - Place before </body> -->
+<div id="modal-privacy" class="policy-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-privacy')">&times;</span>
+    <h2>Privacy Policy</h2>
+
+    <p><strong>Moto Monkeyz</strong> (“we,” “our,” or “us”) is committed to protecting the privacy and security of your personal information. This Privacy Policy outlines the types of information we collect, how we use it, and the measures we take to protect your data when you use our services, visit our website, or interact with us in any capacity.</p>
+
+    <h3>Information We Collect</h3>
+    <p>We collect information to provide better services to our customers and improve our operations. The types of information we may collect include:</p>
+    <ul>
+      <li><strong>Personal Information:</strong> Name, email address, phone number, postal address, and other details you provide when contacting us, booking services, or making purchases.</li>
+      <li><strong>Payment Information:</strong> Credit/debit card details, billing address, and other payment-related information during transactions.</li>
+      <li><strong>Service Information:</strong> Details of the automotive services you avail of, such as detailing, painting, ceramic/graphene coating, or customization.</li>
+      <li><strong>Technical Information:</strong> IP address, browser type, device info, operating system, and browsing behavior on our website.</li>
+      <li><strong>Location Data:</strong> Information about your location when you access our services via mobile or browser-based applications.</li>
+      <li><strong>Communication Data:</strong> Any information shared during your communication with us via emails, calls, or messages.</li>
+    </ul>
+
+    <h3>How We Use Your Information</h3>
+    <p>Your information is used for the following purposes:</p>
+    <ul>
+      <li>To process and fulfill your bookings or purchases.</li>
+      <li>To respond to inquiries and provide customer service.</li>
+      <li>To improve our website functionality, services, and customer experience.</li>
+      <li>To send confirmations, invoices, and important updates.</li>
+      <li>To carry out marketing and promotional campaigns (if you’ve opted in).</li>
+      <li>To comply with applicable legal and regulatory requirements.</li>
+    </ul>
+
+    <h3>Sharing of Information</h3>
+    <p>We do <strong>not sell</strong> your personal data. However, we may share it under the following conditions:</p>
+    <ul>
+      <li><strong>Service Providers:</strong> With trusted third parties assisting in our operations (e.g., payment processors, website hosts). These partners are bound by confidentiality agreements.</li>
+      <li><strong>Legal Requirements:</strong> If mandated by law or in response to legal processes, we may share your data.</li>
+      <li><strong>Business Transfers:</strong> If Moto Monkeyz is involved in a merger, acquisition, or asset sale, your data may be transferred accordingly.</li>
+    </ul>
+
+    <h3>Data Security</h3>
+    <p>We use industry-standard security measures to safeguard your personal information. However, no system is completely secure, and we cannot guarantee the absolute security of your data.</p>
+
+    <h3>Cookies and Tracking</h3>
+    <p>Our website may use cookies or similar technologies to improve performance and personalize your experience. You can disable cookies via your browser settings, but this may affect site functionality.</p>
+
+    <h3>Your Rights</h3>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Request access to or correction of your personal data.</li>
+      <li>Ask us to delete your data, subject to legal obligations.</li>
+      <li>Opt-out of marketing communications at any time.</li>
+      <li>Withdraw consent where processing is based on consent.</li>
+    </ul>
+    <p>To exercise these rights, contact us at the email provided below.</p>
+
+    <h3>Third-Party Links</h3>
+    <p>Our website may contain links to third-party sites. We are not responsible for their privacy practices and recommend reviewing their policies independently.</p>
+
+    <h3>Changes to This Policy</h3>
+    <p>Moto Monkeyz reserves the right to modify this policy as needed. Significant changes will be posted on our website with an updated revision date.</p>
+
+    <h3>Contact Us</h3>
+    <p>If you have any questions about this Privacy Policy, contact us at:</p>
+    <p><strong>Moto Monkeyz</strong><br>
+    Email: <a href="mailto:motomonkeyz19@gmail.com">motomonkeyz19@gmail.com</a></p>
+  </div>
+</div>
+<div id="modal-terms" class="policy-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-terms')">&times;</span>
+    <h2>Terms & Conditions</h2>
+
+    <p>Welcome to the website of <strong>Moto Monkeyz</strong> (“we,” “our,” or “us”). By accessing or using our website, services, and products, you agree to comply with and be bound by the following terms and conditions (“Terms”). Please read these Terms carefully before using our services.</p>
+
+    <h3>Acceptance of Terms</h3>
+    <p>By accessing our website or using our services, you agree to these Terms and any additional terms and conditions that may apply to specific sections of the website or to particular products or services. If you do not agree with these Terms, please do not use our website or services.</p>
+
+    <h3>Services</h3>
+    <p>We provide a range of automotive services, including but not limited to:</p>
+    <ul>
+      <li>Paint Protection Film</li>
+      <li>Ceramic & Graphene Coating</li>
+      <li>Panel Painting</li>
+      <li>Full Body Painting or Colour Change</li>
+      <li>Insurance / Accidental Repair</li>
+      <li>Sound Damping</li>
+      <li>Safety Glazing Film</li>
+      <li>Sunroof Protection Film</li>
+      <li>Vinyl Wrap</li>
+      <li>Interior Cleaning</li>
+      <li>Premium Wash</li>
+      <li>7D Mats</li>
+      <li>Roof Liner Replacement</li>
+      <li>Seat Covers Replacement</li>
+      <li>Windshield Polishing</li>
+      <li>All Glass Polishing</li>
+      <li>All Glass Coating</li>
+      <li>Alloy Wheel Coating</li>
+      <li>Underbody Coating</li>
+      <li>Caliper Painting</li>
+      <li>Headlight Restoration</li>
+    </ul>
+    <p>We also offer car care products and provide opportunities for Franchise and Authorized stores.</p>
+
+    <h3>Use of the Website</h3>
+    <ul>
+      <li><strong>Eligibility:</strong> You must be at least 18 years old to use our website or services.</li>
+      <li><strong>Account Creation:</strong> You may be required to create an account. You are responsible for keeping your login details secure.</li>
+      <li><strong>Prohibited Activities:</strong> You agree not to use our website for any unlawful or unauthorized purposes.</li>
+    </ul>
+
+    <h3>Pricing and Payments</h3>
+    <ul>
+      <li><strong>Pricing:</strong> Prices are subject to change without notice. We reserve the right to correct pricing errors.</li>
+      <li><strong>Payments:</strong> Payment must be made in full at the time of purchase unless otherwise stated.</li>
+    </ul>
+
+    <h3>Service and Product Availability</h3>
+    <ul>
+      <li><strong>Service Availability:</strong> We do not guarantee uninterrupted access to services.</li>
+      <li><strong>Product Availability:</strong> All products are subject to availability and may be discontinued without notice.</li>
+    </ul>
+
+    <h3>Warranties and Disclaimers</h3>
+    <ul>
+      <li><strong>Service Warranty:</strong> We use reasonable skill and care but do not guarantee services will meet your expectations.</li>
+      <li><strong>Product Warranty:</strong> Warranties are provided by manufacturers, not us.</li>
+      <li><strong>Disclaimer:</strong> We disclaim all implied warranties as permitted by law.</li>
+    </ul>
+
+    <h3>Limitation of Liability</h3>
+    <ul>
+      <li><strong>General:</strong> We are not liable for indirect or consequential damages.</li>
+      <li><strong>Maximum Liability:</strong> Limited to the amount you paid for the service/product in question.</li>
+    </ul>
+
+    <h3>Indemnification</h3>
+    <p>You agree to indemnify and hold us harmless from any claims arising from your use of the site, services, or products.</p>
+
+    <h3>Intellectual Property</h3>
+    <ul>
+      <li><strong>Ownership:</strong> All content and logos are our property or that of our licensors.</li>
+      <li><strong>License:</strong> You are granted a limited, non-transferable license to access and use our website for personal use only.</li>
+    </ul>
+
+    <h3>Governing Law</h3>
+    <p>These Terms are governed by the laws of <strong>Maharashtra, India</strong>. Disputes shall be subject to the exclusive jurisdiction of the courts of <strong>Pune, Maharashtra</strong>.</p>
+
+    <h3>Changes to These Terms</h3>
+    <p>We may update these Terms at any time. Continued use after changes means you accept the new Terms.</p>
+
+    <h3>Termination</h3>
+    <p>We reserve the right to suspend or terminate access for violations of these Terms. All granted rights will end upon termination.</p>
+
+    <h3>Contact Us</h3>
+    <p>If you have any questions or concerns about these Terms, please contact us:</p>
+    <p><strong>Moto Monkeyz</strong><br>
+    Address: 15-6-39/2a, Kothuru Street, Satyanarayanapuram, Samalkot, 533440, AP<br>
+    Email: <a href="mailto:motomonkeyz19@gmail.com">motomonkeyz19@gmail.com</a></p>
+  </div>
+</div>
+<div id="modal-refund" class="policy-modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-refund')">&times;</span>
+    <h2>Introduction</h2>
+    <p>
+      At Moto Monkeyz, we are committed to providing top-quality automotive services and car care products. We strive to ensure customer satisfaction in every service and product we offer. This Refund & Cancellation Policy outlines the terms under which cancellations, refunds, and returns are processed for our products.
+    </p>
+
+    <h2>Cancellation Policy</h2>
+    <ul>
+      <li>Customers can cancel their product order within 12 hours of placing it, provided that the product has not been shipped.</li>
+      <li>Once the product has been dispatched, cancellations will not be accepted.</li>
+    </ul>
+
+    <h2>Return, Refund & Replacement Policy</h2>
+    <p>
+      In the event that any product or consumables supplied by Moto Monkeyz to the customer is found to be defective or deficient, the customer shall adhere to the following process:
+    </p>
+    <ul>
+      <li>The customer must notify Moto Monkeyz of any defect or deficiency within 7 (seven) days from the delivery date of the product.</li>
+      <li>If eligible for a refund, it will be processed within 7 to 10 business days and credited to the original payment method used for the transaction.</li>
+      <li>The customer shall ensure that any product return is made in accordance with Moto Monkeyz’s terms and approval process, and the customer shall bear the cost of returning the product.</li>
+      <li>In cases where the product is defective, Moto Monkeyz’s liability is limited solely to replacing the defective product or issuing a credit note.</li>
+      <li>Moto Monkeyz shall have no obligation to cover any additional costs, including but not limited to the application of the product or any consequential damages or losses arising from the defect or deficiency.</li>
+      <li>The customer acknowledges that failure to notify Moto Monkeyz within the 7 (seven) day period will result in the forfeiture of any rights to return or claim regarding the product.</li>
+    </ul>
+
+    <h2>Processing Time & Contact Information</h2>
+    <p>
+      All refunds, cancellations, and return requests will be processed during business hours.
+    </p>
+    <p>
+      <strong>For any assistance, please contact our Customer Support Team at:</strong><br />
+      Phone: <a href="tel:9063765555">9063765555</a><br />
+      Email: <a href="mailto:motomonkeyz19@gmail.com">motomonkeyz19@gmail.com</a><br />
+      Instagram: <a href="https://instagram.com/moto_monkeyz_" target="_blank">@moto_monkeyz_</a><br />
+      Working Hours: 10:00 AM to 6:00 PM
+    </p>
+
+    <h2>Changes to the Policy</h2>
+    <p>
+      Moto Monkeyz reserves the right to modify or update this Refund & Cancellation Policy at any time. Any changes will be reflected on this page with the latest update date mentioned.
+    </p>
+
+  </div>
+</div>
+
+<!-- Updated Footer -->
+<footer>
+  &copy; 2025 Moto Monkeyz &bull; Excellence in Premium Automobiles. <br>
+  <a href="javascript:void(0)" onclick="openModal('modal-privacy')">Privacy Policy</a> |
+  <a href="javascript:void(0)" onclick="openModal('modal-terms')">Terms &amp; Conditions</a> |
+  <a href="javascript:void(0)" onclick="openModal('modal-refund')">Refund &amp; Cancellation</a>
+</footer>
+
+<!-- Modal CSS (inside <style> in <head>) -->
+<style>
+.policy-modal {
+  display: none;
+  position: fixed; z-index: 9999; left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.7);
+  overflow: auto;
+}
+.policy-modal .modal-content {
+  background: #181818;
+  margin: 6% auto;
+  padding: 2em 1.2em 1.3em;
+  border-radius: 13px;
+  max-width: 430px; min-width: 250px;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 8px 40px #0008;
+}
+.policy-modal .close {
+  position: absolute; top: 13px; right: 22px;
+  font-size: 2rem; color: #e10600;
+  font-weight: 900; cursor: pointer;
+  z-index: 21; transition: color 0.23s;
+}
+.policy-modal .close:hover { color: #fff; }
+.policy-modal h2 { color: #e10600; margin-top: 0; }
+.policy-modal a { color: #b38cf6; text-decoration: underline; }
+</style>
+
+<!-- JavaScript: Place just before </body> -->
+<script>
+function openModal(id) {
+  document.getElementById(id).style.display = 'block';
+}
+function closeModal(id) {
+  document.getElementById(id).style.display = 'none';
+}
+window.onclick = function(event) {
+  ['modal-privacy', 'modal-terms', 'modal-refund'].forEach(function(id){
+    var modal = document.getElementById(id);
+    if(event.target === modal) modal.style.display = "none";
+  });
+};
+</script>
+
 </body>
 </html>
