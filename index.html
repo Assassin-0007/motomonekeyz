@@ -168,7 +168,12 @@
   .instagram-container > blockquote { margin: auto; width: 100% !important; display: block;}
   header { background: #1a1a1a; color: var(--text-light); box-shadow: 0 4px 16px #0003; position: sticky; top: 0; z-index: 30;}
   .navbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0;}
-  .navbar .logo { height: 60px;}
+  .navbar .logo {
+  height: 60px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
   .navbar nav a { margin: 0 1.25rem; font-weight: 700; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 1.08rem; letter-spacing: 1.1px; text-transform: uppercase; color: var(--text-light); transition: color 0.18s;}
   .navbar nav a:hover { color: var(--main-red);}
   .hero { min-height: 430px; display: flex; align-items: center; justify-content: flex-start; border-radius: 13px; box-shadow: 0 6px 30px #e1060044; margin: 36px 0 56px; position: relative; overflow: hidden;}
