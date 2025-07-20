@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moto Monkeyz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900|Open+Sans:400,600&display=swap" rel="stylesheet">
+  <!-- Font Awesome 4.7 for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+  :root {
+    --main-red: #e10600;
+    --bg-dark: #111111;
+    --card-bg: #181818;
+    --text-light: #fff;
+    --text-grey: #bbb;
+    --shadow: 0 6px 24px rgba(225,6,0,0.22);
+    --fade-up-init: translateY(60px) scale(.96);
+    --fade-up-end: translateY(0) scale(1);
+    --glow: 0 0 36px 12px #e10600ab;
+  }
+  html, body {
+    margin: 0; padding: 0;
+    background: url('https://images6.alphacoders.com/106/thumb-1920-1066949.jpg') center center / cover no-repeat fixed;
+    color: var(--text-light);
+    font-family: 'Open Sans', Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body {
+    opacity: 0;
+    animation: siteFadeIn .7s cubic-bezier(.22,.68,.6,1) .3s forwards;
+  }
+  @keyframes siteFadeIn { from{opacity:0;} to{opacity:1;} }
+
+  /* Animated Intro Splash */
+  .intro-overlay {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: linear-gradient(135deg, #18181b 62%, #e1060033 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    animation: overlayFadeOut 1.5s .75s forwards cubic-bezier(.7,0,.7,1);
+    pointer-events: none;
+    overflow: hidden;
+  }
+  @keyframes overlayFadeOut { 0%, 85% { opacity: 1; } 100% { opacity: 0; visibility: hidden;} }
+  .intro-logo {
+    width: 105px; margin-bottom: 1.2em;
+    filter: drop-shadow(0 6px 40px #e1060066); z-index: 2;
+    animation: introLogoPop .7s cubic-bezier(.5,0,.3,1.2) .1s both, introLogoGlow 1.5s .6s 1 both;
+    will-change: transform, opacity;
+  }
+  @keyframes introLogoPop {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.13); opacity: 1; }
+    75% { transform: scale(0.95);}
+    100% { transform: scale(1);}
+  }
+  @keyframes introLogoGlow {
+    0% { filter: drop-shadow(0 0 0px #e1060061);}
+    60% { filter: drop-shadow(0 0 44px #e10600cc);}
+    100%{ filter: drop-shadow(0 6px 32px #e1060061);}
+  }
+  .intro-title {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--main-red);
+    letter-spacing: 3px;
+    font-size: 2.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    opacity: 1;
+    text-shadow: 0 2px 36px #e10600cf;
+    position: relative; z-index: 2; overflow: visible;
+  }
+  .intro-title span {
+    opacity: 0;
+    display: inline-block;
+    transform: translateY(30px) scale(0.98) skewY(-5deg);
+    animation: letterPop .6s cubic-bezier(.87,0,.47,1.1) forwards;
+  }
+  .intro-title span:nth-child(1) { animation-delay: 1s;}
+  .intro-title span:nth-child(2) { animation-delay: 1.08s;}
+  .intro-title span:nth-child(3) { animation-delay: 1.16s;}
+  .intro-title span:nth-child(4) { animation-delay: 1.25s;}
+  .intro-title span:nth-child(5) { animation-delay: 1.33s;}
+  .intro-title span:nth-child(6) { animation-delay: 1.41s;}
+  .intro-title span:nth-child(7) { animation-delay: 1.49s;}
+  .intro-title span:nth-child(8) { animation-delay: 1.57s;}
+  .intro-title span:nth-child(9) { animation-delay: 1.65s;}
+  .intro-title span:nth-child(10){ animation-delay: 1.72s;}
+  .intro-title span:nth-child(11){ animation-delay: 1.77s;}
+  @keyframes letterPop {
+    0% { opacity: 0; transform: translateY(30px) scale(.98) skewY(-5deg);}
+    65%{ opacity: 1; transform: translateY(-9px) scale(1.07) skewY(2deg);}
+    100%{ opacity: 1; transform: none;}
+  }
+  .intro-title::after {
+    content: '';position: absolute;left: -40px;top: 10px;width: 60px;height: 100%;
+    pointer-events: none;
+    background: linear-gradient(119deg, rgba(255,255,255,0) 50%,rgba(255,255,255,.36) 63%,rgba(255,255,255,0) 78%);
+    transform: skewX(-17deg);opacity: 0;
+    animation: shimmer 1.04s 2.2s 1 forwards;
+  }
+  @keyframes shimmer {
+    0%{ opacity:0; left: -40px;}
+    35%{ opacity:1;}
+    60%{ opacity:1;}
+    100%{ opacity:0; left: 230px;}
+  }
+  #intro-particles {
+    position: absolute; inset: 0; width: 100vw; height: 100vh;
+    pointer-events: none; background: transparent; z-index: 0;
+  }
+
+  /* Section entry animations (all fields!) */
+  section, .instagram-container, .about, .why-choose-us, .contact, footer {
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(60px) scale(.96);
+    transition: 0.8s cubic-bezier(.22,.84,.51,1.09) opacity, 0.8s cubic-bezier(.51,.1,.31,1) transform;
+  }
+  section.visible, .instagram-container.visible, .about.visible, .why-choose-us.visible, .contact.visible, footer.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Service cards fly up as before */
+  .service-card {
+    opacity: 0;
+    transform: translateY(55px) scale(0.96);
+    transition: box-shadow .23s, transform .21s, opacity .7s;
+  }
+  .service-card.visible {
+    opacity: 1; transform: none;
+  }
+
+  /* All your field/section styling is unchanged, below... */
+  .service-card,
+  .about,
+  .why-choose-us,
+  .contact,
+  .hero,
+  .instagram-container,
+  footer {
+    background-color: rgba(24, 24, 24, 0.7) !important;
+    backdrop-filter: blur(1.2px);
+  }
+  a { color: var(--main-red); text-decoration: none; }
+  a:hover { color: #ff4c4c; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; }
+  .instagram-container { display: flex; align-items: center; justify-content: center; padding: 20px 10px; margin: 24px auto; border-radius: 12px; max-width: 640px; min-height: 360px; box-shadow: 0 0 15px rgba(0,0,0,0.4);}
+  .instagram-container > blockquote { margin: auto; width: 100% !important; display: block;}
+  header { background: #1a1a1a; color: var(--text-light); box-shadow: 0 4px 16px #0003; position: sticky; top: 0; z-index: 30;}
+  .navbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0;}
+  .navbar .logo { height: 60px;}
+  .navbar nav a { margin: 0 1.25rem; font-weight: 700; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 1.08rem; letter-spacing: 1.1px; text-transform: uppercase; color: var(--text-light); transition: color 0.18s;}
+  .navbar nav a:hover, .navbar nav a.active { color: var(--main-red);}
+  .hero { min-height: 430px; display: flex; align-items: center; justify-content: flex-start; border-radius: 13px; box-shadow: 0 6px 30px #e1060044; margin: 36px 0 56px; position: relative; overflow: hidden;}
+  .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,#070606 78%,rgba(0,0,0,0) 100%); opacity: 0.87; z-index: 1;}
+  .hero-content { position: relative; z-index: 2; padding: 3.2rem 1rem 2rem 3.4rem; max-width: 550px;}
+  .hero-content h1 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 2.85rem; color: var(--main-red); margin-bottom: 1.13rem; font-weight: 900; letter-spacing: 2.1px; text-transform: uppercase;}
+  .hero-content p { color: var(--text-light); font-family: 'Open Sans', Arial, sans-serif; font-size: 1.23rem; line-height: 1.6; margin-bottom: 2rem; font-weight: 400;}
+  .cta-btn { background: var(--main-red); color: var(--text-light); font-family: 'Montserrat', 'Segoe UI', sans-serif; padding: 1rem 2.5rem; font-weight: 700; border-radius: 6px; border: none; font-size: 1.15rem; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; box-shadow: 0 2px 14px #e1060040; transition: background 0.16s;}
+  .cta-btn:hover { background: #ff1a1a;}
+  .service-grid { display: grid; gap: 2.15rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));}
+  .service-card::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.52); z-index: 0; transition: background 0.3s;}
+  .service-card:hover { box-shadow: 0 18px 45px #e1060061; transform: translateY(-7px) scale(1.045); z-index: 2;}
+  .service-card:hover::before { background: rgba(225,6,0,0.38);}
+  .service-card > * { position: relative; z-index: 1;}
+  .service-card i { background: rgba(35,35,35,0.72); color: var(--main-red); border-radius: 50%; font-size: 2.5rem; padding: 16px; display: block; margin-bottom: 1.03em; box-shadow: 0 2px 8px #e1060017; transition: background 0.18s;}
+  .service-card h3 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: #fff; font-size: 1.18rem; margin-bottom: .5em; font-weight: 700; text-shadow: 0 2px 8px #0009;}
+  .service-card p { color: #f2f2f2; font-size: 0.99rem; line-height: 1.48; font-family: 'Open Sans', Arial, sans-serif; text-shadow: 0 2px 8px #0007;}
+  .services { margin: 64px 0 54px; text-align: left;}
+  .services h2 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: var(--main-red); font-size: 2.13rem; margin-bottom: 2.7rem; font-weight: 900; letter-spacing: 0.9px; text-transform: uppercase; border-bottom: 2.7px solid #302f2f; display: inline-block; padding-bottom: 0.16em;}
+  .about, .why-choose-us { margin: 52px 0; border-radius: 11px; padding: 2rem 1.4rem; box-shadow: 0 1px 12px #e1060022;}
+  .section-title { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: var(--main-red); font-size: 1.72rem; font-weight: 900; text-transform: uppercase; border-left: 5px solid var(--main-red); padding-left: 0.72em; margin-bottom: 0.44em; letter-spacing: 0.2px;}
+  .about p, .why-choose-us ul { font-size: 1.07rem; color: #e6e6e6; font-family: 'Open Sans', Arial, sans-serif;}
+  .why-choose-us ul { padding-left: 1.3em; }
+  .why-choose-us li { margin: 0.36em 0; }
+  .contact { margin: 52px 0 10px 0; border-radius: 12px; box-shadow: 0 1px 16px #e1060013; padding: 2.2rem 2rem 2rem; color: var(--text-light);}
+  .contact h2 { font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; color: var(--main-red); font-size: 1.5rem; margin-bottom: 1.16rem; font-weight: 900; text-transform: uppercase; }
+  .contact-details p, .contact-details a { font-size: 1.07em; color: #f9f9f9;}
+  .contact-details a { font-weight: 600; }
+  .whatsapp_float { position: fixed; width: 62px; height: 62px; bottom: 32px; right: 32px; background: #25d366; color: #fff !important; border-radius: 50%; z-index: 105; display: flex; align-items: center; justify-content: center; font-size: 39px; box-shadow: 2px 2px 12px #000c; transition: background 0.19s;}
+  .whatsapp_float:hover { background: #128C7E; }
+  footer { text-align: center; color: #adadad; padding: 1rem 0 0.6rem; margin-top: 32px; font-size: 1.02rem; letter-spacing: 0.04em; font-family: 'Open Sans', Arial, sans-serif;}
+  @media (max-width: 900px) {
+    .navbar { flex-direction: column; align-items: stretch; gap: 0.64em; }
+    .hero     { flex-direction: column; min-height: 310px; }
+    .hero-content { padding: 1.7rem 1em 2.4rem 1.5rem; }
+  }
+  @media (max-width: 600px) {
+    .container   { padding: 0 2px; }
+    .navbar .logo { height: 43px; }
+    .services     { margin: 33px 0; }
+    .contact      { padding: 1rem 0.2rem; }
+    .about, .why-choose-us { padding: 1rem 0.8rem; }
+    .intro-title { font-size: 1.16rem;}
+    .intro-logo { width:56px;}
+  }
+  </style>
+</head>
+<body>
+  <!-- Animated Intro Splash -->
+  <div class="intro-overlay" id="intro-overlay">
+    <canvas id="intro-particles"></canvas>
+    <img src="https://i.ibb.co/gbRG0KyK/01-2.png" class="intro-logo" alt="Moto Monkeyz Logo">
+    <div class="intro-title">
+      <span>M</span><span>O</span><span>T</span><span>O</span>
+      <span style="margin-left:.66em;">M</span><span>O</span><span>N</span><span>K</span><span>E</span><span>Y</span><span>Z</span>
+    </div>
+  </div>
+  <!-- HEADER -->
+  <header>
+    <div class="navbar container">
+      <img src="https://i.ibb.co/gbRG0KyK/01-2.png" alt="Moto Monkeyz Logo" class="logo">
+      <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#services">Showroom</a>
+        <a href="#about">The Story</a>
+        <a href="#why">Why Moto Monkeyz?</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <!-- HERO BANNER -->
+  <section class="hero container" id="home">
+    <div class="hero-content">
+      <h1>Experience Excellence<br>On Every Drive</h1>
+      <p>Unleash your passion for automobiles! Discover our exclusive fleet of premium cars—paired with expert care, transparent deals, and outstanding after-sales support from Moto Monkeyz.</p>
+      <a href="#services"><button class="cta-btn">Browse Cars</button></a>
+    </div>
+  </section>
+  <!-- SERVICES -->
+  <section class="services container" id="services">
+    <h2>Featured Services</h2>
+    <div class="service-grid">
+      <div class="service-card" style="background-image:url('https://i.ibb.co/xtSqPfLY/download.jpg')">
+        <i class="fa fa-car"></i>
+        <h3>New Cars</h3>
+        <p>Select from a range of performance and luxury vehicles, each thoroughly inspected and approved by our experts.</p>
+      </div>
+      <div class="service-card" style="background-image:url('https://i.ibb.co/m5Tgb2xL/download-1.jpg')">
+        <i class="fa fa-exchange"></i>
+        <h3>Sell Instantly</h3>
+        <p>Upgrade or sell your car with ease. Get fast quotes and secure payments with zero hassle.</p>
+      </div>
+      <div class="service-card" style="background-image:url('https://i.ibb.co/1JX0fhCj/download-2.jpg')">
+        <i class="fa fa-shield"></i>
+        <h3>Insurance Support</h3>
+        <p>Comprehensive vehicle insurance assistance—get the protection you need for the road ahead.</p>
+      </div>
+      <div class="service-card" style="background-image:url('https://i.ibb.co/hxWHVPFp/download-3.jpg')">
+        <i class="fa fa-cogs"></i>
+        <h3>Customization</h3>
+        <p>Personalize your ride with performance upgrades and luxury accessories, fitted by specialists.</p>
+      </div>
+      <div class="service-card" style="background-image:url('https://i.ibb.co/tpYvv5nT/download-4.jpg')">
+        <i class="fa fa-star"></i>
+        <h3>Elite Detailing</h3>
+        <p>Pamper your car with our professional detailing and care solutions for a showroom finish every day.</p>
+      </div>
+      <div class="service-card" style="background-image:url('https://i.ibb.co/Z1d04dMy/download-5.jpg')">
+        <i class="fa fa-gift"></i>
+        <h3>Premium Accessories</h3>
+        <p>Enhance your vehicle’s style and comfort. Explore our curated selection of quality add-ons.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ABOUT -->
+  <section class="about container" id="about">
+    <div class="section-title">Our Drive</div>
+    <p>
+      Moto Monkeyz was founded to deliver an exceptional automotive journey—whether you are buying, selling, or seeking automotive upgrades.
+      We believe in trust, transparency, and total satisfaction for every client.
+    </p>
+  </section>
+  <!-- WHY US -->
+  <section class="why-choose-us container" id="why">
+    <div class="section-title">Why Trust Moto Monkeyz?</div>
+    <ul>
+      <li><strong>Integrity:</strong> Honest pricing, authentic vehicles, and clear documentation always.</li>
+      <li><strong>Reputation:</strong> A growing community of repeat buyers and 5-star owners.</li>
+      <li><strong>Expert Team:</strong> Passionate automotive professionals here to serve you.</li>
+      <li><strong>All-in-One Services:</strong> Sales, upgrades, insurance, and aftercare—your journey made simple.</li>
+      <li><strong>Thorough Checks:</strong> Every car is rigorously evaluated before it reaches our showcase.</li>
+      <li><strong>Support For Life:</strong> We’re always a call away, even after purchase.</li>
+    </ul>
+  </section>
+  <!-- Instagram embed centered with wrapper! -->
+  <div class="instagram-container fade-up">
+    <blockquote class="instagram-media"
+      data-instgrm-permalink="https://www.instagram.com/moto_monkeyz_/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+      data-instgrm-version="12"
+      style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 1px; max-width:540px; min-width:326px; padding:0; width:99.375%;">
+      <div style="padding:16px;">
+        <a href="https://www.instagram.com/moto_monkeyz_/?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+          target="_blank" style="color:#222;text-decoration:none;font-weight:bold;">
+          View this post on Instagram
+        </a>
+      </div>
+    </blockquote>
+  </div>
+  <script async src="https://www.instagram.com/embed.js"></script>
+  <!-- CONTACT -->
+  <section class="contact container" id="contact">
+    <h2>Contact Moto Monkeyz</h2>
+    <div class="contact-details">
+      <p><strong>Location:</strong> 15-6-39/2a, Kothuru Street, Satyanarayanapuram, Samalkot, 533440, AP</p>
+      <p><strong>Phone:</strong> <a href="tel:+9063765555">9063765555</a></p>
+      <p><strong>Email:</strong> <a href="mailto:motomonkeyz19@gmail.com">motomonkeyz19@gmail.com</a></p>
+      <p><strong>Instagram:</strong> <a href="https://www.instagram.com/moto_monkeyz_/" target="_blank">@moto_monkeyz_</a></p>
+      <br>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.160146073489!2d82.1841499!3d17.0454121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a37815c6f8a8aaf%3A0xb0e8c85bb5a9f85c!2sSamalkot!5e0!3m2!1sen!2sin!4v1710426741928"
+        class="map"
+        width="100%"
+        height="210"
+        style="border:0; border-radius:7px; box-shadow:0 2px 8px #e1060022;"
+        allowfullscreen
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+  <!-- WhatsApp Floating Button -->
+  <a
+    href="https://wa.me/9063765555"
+    class="whatsapp_float"
+    target="_blank"
+    aria-label="WhatsApp">
+    <i class="fa fa-whatsapp whatsapp-icon"></i>
+  </a>
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Moto Monkeyz &bull; Excellence in Premium Automobiles.
+  </footer>
+  <!-- Animations and Fancy Intro JS -->
+  <script>
+    window.onload = function () {
+      // Section fade-up
+      function revealOnScroll(selector) {
+        const els = document.querySelectorAll(selector);
+        function reveal() {
+          els.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 48) el.classList.add('visible');
+          });
+        }
+        window.addEventListener('scroll', reveal, {passive: true});
+        reveal();
+      }
+      // Service cards scroll-up
+      function cardOnScroll(selector) {
+        const els = document.querySelectorAll(selector);
+        function reveal() {
+          els.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 40) el.classList.add('visible');
+          });
+        }
+        window.addEventListener('scroll', reveal, {passive: true});
+        reveal();
+      }
+      revealOnScroll('section, .instagram-container, footer');
+      cardOnScroll('.service-card');
+      // Intro overlay exit
+      setTimeout(function(){
+        const overlay = document.getElementById('intro-overlay');
+        if(overlay) overlay.style.display = 'none';
+      }, 2500);
+      // NAV highlight on scroll
+      const navLinks = document.querySelectorAll('.navbar nav a');
+      window.addEventListener('scroll', function(){
+        let fromTop = window.scrollY+71;
+        navLinks.forEach(link => {
+          const section = document.querySelector(link.hash);
+          if(section) {
+            if(section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          }
+        });
+      }, {passive: true});
+      // Fancy particles (only in intro overlay)
+      const canvas = document.getElementById('intro-particles');
+      if(canvas){
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth, h = canvas.height = window.innerHeight;
+        let particles = [];
+        for(let i=0;i<55;i++) particles.push({
+          x: Math.random()*w, y: Math.random()*h,
+          r: Math.random()*3+2,
+          dx: (Math.random()-.5)*0.43, dy: (Math.random()-.5)*0.42,
+          o: Math.random()*0.37+0.19
+        });
+        function draw(){
+          ctx.clearRect(0,0,w,h);
+          for(const p of particles){
+            ctx.beginPath();
+            ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
+            ctx.fillStyle = `rgba(225,6,0,${p.o})`;
+            ctx.shadowBlur=12; ctx.shadowColor='#e10600aa';
+            ctx.fill();
+            ctx.shadowBlur=0;
+            p.x += p.dx; p.y += p.dy;
+            if(p.x<0||p.x>w) p.dx*=-1;
+            if(p.y<0||p.y>h) p.dy*=-1;
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+        setTimeout(()=>{canvas.style.display='none';},2100);
+        window.addEventListener("resize", ()=>{w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;});
+      }
+    };
+  </script>
+</body>
+</html>
