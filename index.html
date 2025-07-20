@@ -34,23 +34,34 @@
   }
   @keyframes siteFadeIn { from{opacity:0;} to{opacity:1;} }
 
-  /* Animated Intro Splash */
+  /* Modern Animated Intro Splash */
   .intro-overlay {
     position: fixed;
     z-index: 9999;
     inset: 0;
     background: linear-gradient(135deg, #18181b 62%, #e1060033 100%);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     animation: overlayFadeOut 1.5s .75s forwards cubic-bezier(.7,0,.7,1);
     pointer-events: none;
     overflow: hidden;
   }
-  @keyframes overlayFadeOut { 0%, 85% { opacity: 1; } 100% { opacity: 0; visibility: hidden;} }
+  @keyframes overlayFadeOut {
+    0%, 85% { opacity: 1; }
+    100% { opacity: 0; visibility: hidden;}
+  }
   .intro-logo {
-    width: 105px; margin-bottom: 1.2em;
-    filter: drop-shadow(0 6px 40px #e1060066); z-index: 2;
-    animation: introLogoPop .7s cubic-bezier(.5,0,.3,1.2) .1s both, introLogoGlow 1.5s .6s 1 both;
+    width: 105px;
+    height: auto;
+    display: block;
+    margin-bottom: 1.2em;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 40px #e1060066);
     will-change: transform, opacity;
+    animation: introLogoPop .7s cubic-bezier(.5,0,.3,1.2) .1s both, introLogoGlow 1.5s .6s 1 both;
+    z-index: 2;
   }
   @keyframes introLogoPop {
     0% { transform: scale(0.3); opacity: 0; }
@@ -72,7 +83,9 @@
     text-transform: uppercase;
     opacity: 1;
     text-shadow: 0 2px 36px #e10600cf;
-    position: relative; z-index: 2; overflow: visible;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
   }
   .intro-title span {
     opacity: 0;
@@ -97,10 +110,16 @@
     100%{ opacity: 1; transform: none;}
   }
   .intro-title::after {
-    content: '';position: absolute;left: -40px;top: 10px;width: 60px;height: 100%;
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 10px;
+    width: 60px;
+    height: 100%;
     pointer-events: none;
     background: linear-gradient(119deg, rgba(255,255,255,0) 50%,rgba(255,255,255,.36) 63%,rgba(255,255,255,0) 78%);
-    transform: skewX(-17deg);opacity: 0;
+    transform: skewX(-17deg);
+    opacity: 0;
     animation: shimmer 1.04s 2.2s 1 forwards;
   }
   @keyframes shimmer {
@@ -114,29 +133,24 @@
     pointer-events: none; background: transparent; z-index: 0;
   }
 
-  /* Section entry animations (all fields!) */
+  /* Fancy fade-up for all main sections and cards */
   section, .instagram-container, .about, .why-choose-us, .contact, footer {
     will-change: transform, opacity;
     opacity: 0;
     transform: translateY(60px) scale(.96);
-    transition: 0.8s cubic-bezier(.22,.84,.51,1.09) opacity, 0.8s cubic-bezier(.51,.1,.31,1) transform;
+    transition: 0.85s cubic-bezier(.22,.84,.51,1.09) opacity, 0.8s cubic-bezier(.51,.1,.31,1) transform;
   }
   section.visible, .instagram-container.visible, .about.visible, .why-choose-us.visible, .contact.visible, footer.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-
-  /* Service cards fly up as before */
   .service-card {
     opacity: 0;
     transform: translateY(55px) scale(0.96);
-    transition: box-shadow .23s, transform .21s, opacity .7s;
+    transition: box-shadow .23s, transform .21s, opacity .8s .1s;
   }
-  .service-card.visible {
-    opacity: 1; transform: none;
-  }
+  .service-card.visible { opacity: 1; transform: none; }
 
-  /* All your field/section styling is unchanged, below... */
   .service-card,
   .about,
   .why-choose-us,
@@ -156,7 +170,7 @@
   .navbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0;}
   .navbar .logo { height: 60px;}
   .navbar nav a { margin: 0 1.25rem; font-weight: 700; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 1.08rem; letter-spacing: 1.1px; text-transform: uppercase; color: var(--text-light); transition: color 0.18s;}
-  .navbar nav a:hover, .navbar nav a.active { color: var(--main-red);}
+  .navbar nav a:hover { color: var(--main-red);}
   .hero { min-height: 430px; display: flex; align-items: center; justify-content: flex-start; border-radius: 13px; box-shadow: 0 6px 30px #e1060044; margin: 36px 0 56px; position: relative; overflow: hidden;}
   .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg,#070606 78%,rgba(0,0,0,0) 100%); opacity: 0.87; z-index: 1;}
   .hero-content { position: relative; z-index: 2; padding: 3.2rem 1rem 2rem 3.4rem; max-width: 550px;}
@@ -165,6 +179,7 @@
   .cta-btn { background: var(--main-red); color: var(--text-light); font-family: 'Montserrat', 'Segoe UI', sans-serif; padding: 1rem 2.5rem; font-weight: 700; border-radius: 6px; border: none; font-size: 1.15rem; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; box-shadow: 0 2px 14px #e1060040; transition: background 0.16s;}
   .cta-btn:hover { background: #ff1a1a;}
   .service-grid { display: grid; gap: 2.15rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));}
+  .service-card { border-radius: 13px; box-shadow: 0 2px 16px #e1060033; text-align: left; padding: 2.1rem 1.3rem 1.43rem; position: relative; background-size: cover; background-position: center; color: #fff; overflow: hidden;}
   .service-card::before { content:''; position:absolute; inset:0; background:rgba(0,0,0,0.52); z-index: 0; transition: background 0.3s;}
   .service-card:hover { box-shadow: 0 18px 45px #e1060061; transform: translateY(-7px) scale(1.045); z-index: 2;}
   .service-card:hover::before { background: rgba(225,6,0,0.38);}
@@ -198,7 +213,7 @@
     .contact      { padding: 1rem 0.2rem; }
     .about, .why-choose-us { padding: 1rem 0.8rem; }
     .intro-title { font-size: 1.16rem;}
-    .intro-logo { width:56px;}
+    .intro-logo { width:56px; height:auto; }
   }
   </style>
 </head>
@@ -206,7 +221,7 @@
   <!-- Animated Intro Splash -->
   <div class="intro-overlay" id="intro-overlay">
     <canvas id="intro-particles"></canvas>
-    <img src="https://i.ibb.co/gbRG0KyK/01-2.png" class="intro-logo" alt="Moto Monkeyz Logo">
+    <img src="https://i.ibb.co/gbRG0KyK/01-2.png" class="intro-logo" alt="Moto Monkeyz Logo" width="154" height="100">
     <div class="intro-title">
       <span>M</span><span>O</span><span>T</span><span>O</span>
       <span style="margin-left:.66em;">M</span><span>O</span><span>N</span><span>K</span><span>E</span><span>Y</span><span>Z</span>
@@ -218,7 +233,7 @@
       <img src="https://i.ibb.co/gbRG0KyK/01-2.png" alt="Moto Monkeyz Logo" class="logo">
       <nav>
         <a href="#home" class="active">Home</a>
-        <a href="#services">Showroom</a>
+        <a href="#services">Services</a>
         <a href="#about">The Story</a>
         <a href="#why">Why Moto Monkeyz?</a>
         <a href="#contact">Contact</a>
@@ -338,6 +353,7 @@
   </footer>
   <!-- Animations and Fancy Intro JS -->
   <script>
+    // Particle dots in intro overlay (only while visible)
     window.onload = function () {
       // Section fade-up
       function revealOnScroll(selector) {
@@ -365,7 +381,7 @@
       }
       revealOnScroll('section, .instagram-container, footer');
       cardOnScroll('.service-card');
-      // Intro overlay exit
+      // Animated intro logo text etc handled by CSS
       setTimeout(function(){
         const overlay = document.getElementById('intro-overlay');
         if(overlay) overlay.style.display = 'none';
