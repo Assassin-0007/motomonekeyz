@@ -78,7 +78,7 @@
   }
   .intro-title {
     font-family: 'Montserrat', sans-serif;
-    color: var(--main-red);
+    color: white;
     letter-spacing: 3px;
     font-size: 2.3rem;
     font-weight: 900;
@@ -171,8 +171,8 @@
   header { background: #1a1a1a; color: var(--text-light); box-shadow: 0 4px 16px #0003; position: sticky; top: 0; z-index: 30;}
   .navbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0;}
   .navbar .logo {
-  height: 83px;
-  width: 83px;
+  height: 100px;
+  width: 100px;
   max-width: 100%;
   object-fit: contain;
 }
@@ -284,23 +284,47 @@
     transition: transform .35s cubic-bezier(.61,.11,.45,1.25);
     z-index: 99;
   }
-  .navbar nav.open { transform: translateX(0); }
-  .navbar .logo { margin-left: 0; }
+.navbar nav.open {
+  transform: translateX(0);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* Or center, if you prefer links centered */
+  gap: 1.2em;              /* Vertical space between links */
 }
+
+  .navbar .logo { margin-left: 0; }
+
 body.menu-open { overflow: hidden; }
 .nav-toggle.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; }
 .nav-toggle.open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+
+.intro-subline {
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  margin-top: 18px;
+  letter-spacing: 1.2px;
+  text-align: center;
+  text-shadow: 0 2px 18px #000c;
+  opacity: 0.85;
+  z-index: 2;
+}
+
   </style>
+
 </head>
 <body>
   <!-- Animated Intro Splash -->
   <div class="intro-overlay" id="intro-overlay">
     <canvas id="intro-particles"></canvas>
     <img src="https://i.ibb.co/gbRG0KyK/01-2.png" class="intro-logo" alt="Moto Monkeyz Logo" width="154" height="100">
-    <div class="intro-title">
+    <div class="intro-subline">
       <span>M</span><span>O</span><span>T</span><span>O</span>
       <span style="margin-left:.66em;">M</span><span>O</span><span>N</span><span>K</span><span>E</span><span>Y</span><span>Z</span>
+    <p class="intro-title"><span style="margin-left:.66em;">We</span> <span> make</span> <span> your</span> <span> path</span> <span> easier</span>
+    </span></p>
     </div>
   </div>
 
