@@ -24,18 +24,35 @@
     }
     html, body {
       margin: 0; padding: 0;
-      background: url('https://images6.alphacoders.com/106/thumb-1920-1066949.jpg') center center / cover no-repeat fixed;
+      min-height: 100vh;
       color: var(--text-light);
       font-family: 'Open Sans', Arial, sans-serif;
-      min-height: 100vh;
       overflow-x: hidden;
+      background: #18181b;
+    }
+    /* Fix background image for all browsers using ::before trick */
+    body::before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: url('https://images6.alphacoders.com/106/thumb-1920-1066949.jpg') center center / cover no-repeat;
+      opacity: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 700px) {
+      body::before {
+        position: absolute; /* Allows scrolling bg on mobile Safari */
+        height: 100vh;
+      }
     }
     body {
       opacity: 0;
       animation: siteFadeIn .7s cubic-bezier(.22,.68,.6,1) .3s forwards;
+      background: #18181b; /* fallback color */
     }
     @keyframes siteFadeIn { from{opacity:0;} to{opacity:1;} }
-    /* Modern Animated Intro Splash */
+    /* Animated Intro Splash */
     .intro-overlay {
       position: fixed;
       z-index: 9999;
@@ -87,17 +104,10 @@
       opacity: 0.85;
       z-index: 2;
     }
-    /* Custom gap only on desktop for subline */
-    .intro-subline span {
-      /* No default margin, we set it below on large screens */
-    }
+    .intro-subline span {}
     @media (min-width: 601px) {
-      .intro-subline span:nth-child(5) {
-        margin-left: .66em;
-      }
+      .intro-subline span:nth-child(5) { margin-left: .66em; }
     }
-
-    /* INTRO TITLE FIXES */
     .intro-title {
       font-family: 'Montserrat', sans-serif;
       color: white;
@@ -105,12 +115,11 @@
       font-size: 2.3rem;
       font-weight: 900;
       text-transform: uppercase;
-      opacity: 1;
       text-shadow: 0 2px 36px #e10600cf;
       position: relative;
       z-index: 2;
       overflow: visible;
-      text-align: center;          /* Ensure the whole phrase is always centered */
+      text-align: center;
       word-break: break-word;
     }
     .intro-title span {
@@ -118,14 +127,13 @@
       display: inline-block;
       transform: translateY(30px) scale(0.98) skewY(-5deg);
       animation: letterPop .6s cubic-bezier(.87,0,.47,1.1) forwards;
-      margin-left: 0 !important;   /* Remove margin for centering */
+      margin-left: 0 !important;
     }
     .intro-title span:nth-child(1) { animation-delay: 1s;}
     .intro-title span:nth-child(2) { animation-delay: 1.08s;}
     .intro-title span:nth-child(3) { animation-delay: 1.16s;}
     .intro-title span:nth-child(4) { animation-delay: 1.25s;}
     .intro-title span:nth-child(5) { animation-delay: 1.33s;}
-    /* Remove margin-left from HTML on "We" below. */
     @keyframes letterPop {
       0% { opacity: 0; transform: translateY(30px) scale(.98) skewY(-5deg);}
       65%{ opacity: 1; transform: translateY(-9px) scale(1.07) skewY(2deg);}
@@ -134,10 +142,8 @@
     .intro-title::after {
       content: '';
       position: absolute;
-      left: -40px;
-      top: 10px;
-      width: 60px;
-      height: 100%;
+      left: -40px; top: 10px;
+      width: 60px; height: 100%;
       pointer-events: none;
       background: linear-gradient(119deg, rgba(255,255,255,0) 50%,rgba(255,255,255,.36) 63%,rgba(255,255,255,0) 78%);
       transform: skewX(-17deg);
@@ -154,7 +160,6 @@
       position: absolute; inset: 0; width: 100vw; height: 100vh;
       pointer-events: none; background: transparent; z-index: 0;
     }
-
     /* Fade-up effect */
     section, .instagram-container, .about, .why-choose-us, .contact, footer {
       will-change: transform, opacity;
@@ -174,96 +179,65 @@
       transition: box-shadow .23s, transform .21s, opacity .8s .1s;
     }
     .service-card.visible { opacity: 1; transform: none; }
-
-    /* NAVBAR + HAMBURGER */
+    /* Navbar + Hamburger */
     header { background: #1a1a1a; color: var(--text-light); box-shadow: 0 4px 16px #0003; position: sticky; top: 0; z-index: 30;}
     .navbar { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0;}
     .navbar .logo { height: 100px; width: 100px; max-width: 100%; object-fit: contain; }
     .navbar nav a { margin: 0 1.25rem; font-weight: 700; font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif; font-size: 1.08rem; letter-spacing: 1.1px; text-transform: uppercase; color: var(--text-light); transition: color 0.18s;}
     .navbar nav a.active, .navbar nav a:hover { color: var(--main-red);}
     .navbar .logo { margin-left: 0; }
-
     .nav-toggle {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-      width: 38px;
-      height: 38px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      position: absolute;
-      top: 1.2rem;
-      right: 1.5rem;
-      z-index: 100;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 6px; width: 38px; height: 38px; background: none; border: none;
+      cursor: pointer; position: absolute; top: 1.2rem; right: 1.5rem; z-index: 100;
     }
     .nav-toggle span {
-      display: block; height: 4px; width: 100%;
-      background: #fff; border-radius: 2px; transition: all 0.28s cubic-bezier(.89,-0.12,.71,1.12);
+      display: block; height: 4px; width: 100%; background: #fff; border-radius: 2px; transition: all 0.28s cubic-bezier(.89,-0.12,.71,1.12);
     }
     .nav-toggle.open span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
     .nav-toggle.open span:nth-child(3) { transform: translateY(-10px) rotate(-45deg);}
     .navbar nav {
-      position: fixed;
-      top: 0; right: 0;
+      position: fixed; top: 0; right: 0;
       background: rgba(24,24,24,0.995);
-      flex-direction: column;
-      gap: 0;
-      align-items: flex-end;
-      padding: 70px 24px 24px 36px;
-      height: 100vh;
-      min-width: 190px;
-      box-shadow: -1px 0 8px #000b;
+      flex-direction: column; gap: 0;
+      align-items: flex-end; padding: 70px 24px 24px 36px;
+      height: 100vh; min-width: 190px; box-shadow: -1px 0 8px #000b;
       transform: translateX(100%);
       transition: transform .35s cubic-bezier(.61,.11,.45,1.25);
-      z-index: 99;
-      display: flex;
+      z-index: 99; display: flex;
     }
     .navbar nav.open { transform: translateX(0); display: flex; flex-direction: column; align-items: flex-start; gap: 1.2em; }
-
     body.menu-open { overflow: hidden; }
-
-    /* Responsive hamburger at top on mobile and logo size */
+    /* Responsive hamburger and mobile styles */
     @media (max-width: 900px) {
       .navbar { position: relative; min-height: 60px;}
-      .hero     { flex-direction: column; min-height: 310px; }
-      .hero-content { padding: 1.7rem 1em 2.4rem 1.5rem; }
-      .nav-toggle {
-        position: absolute;
-        top: 10px;
-        right: 18px;
-        z-index: 100;
-      }
+      .nav-toggle { top: 28px; right: 15px;}
+      .hero     { flex-direction: column; min-height: 310px;}
+      .hero-content { padding: 1.7rem 1em 2.4rem 1.5rem;}
     }
     @media (max-width: 600px) {
-      .container   { padding: 0 8px; }
-      .navbar { min-height: 60px; padding-top: 10px; padding-bottom: 10px; }
-      .navbar .logo { height: 40px; width: 40px;}
-      .nav-toggle { top: 8px; right: 10px; width: 34px; height: 34px;}
-      .intro-title { font-size: 1.16rem;}
-      .intro-logo { width:56px; height:auto; }
-      .services, .about, .why-choose-us, .contact { margin: 18px 0; }
-      .hero-content h1 { font-size: 1.4rem; }
-      .hero-content p { font-size: 0.97rem; }
-      .service-grid { grid-template-columns: 1fr; gap: 0.83rem; }
-      .cta-btn { padding: 0.8rem 1.4rem; font-size: 1rem;}
-      .policy-modal .modal-content { max-width: 99vw; min-width: 0; padding: 1em 0.7em 1em;}
+      .container   { padding: 0 5px; }
+      .navbar { min-height: 54px; padding: 8px 0; }
+      .navbar .logo { height: 37px; width: 37px; }
+      .nav-toggle { top: 10px; right: 9px; width: 32px; height: 32px;}
+      .intro-title { font-size: 1.185rem;}
+      .intro-logo { width:46px; height:auto; }
+      .service-grid { grid-template-columns: 1fr; gap: 0.69rem;}
+      .hero-content h1 { font-size: 1.07rem; }
+      .hero-content p { font-size: 0.92rem;}
+      .cta-btn { font-size: 0.93rem; padding: 0.7rem 1.1rem;}
+      .policy-modal .modal-content {max-width: 99vw; min-width: 0; padding: 1em 0.7em 1em;}
       .whatsapp_float { right: 9px; bottom: 9px; width: 47px; height: 47px; font-size: 22px;}
-      .intro-title span { margin-left: 0 !important; }
     }
     @media (max-width: 920px) {
       .navbar nav {
         position: fixed;
         top: 0; left: 0; right: 0;
         background: rgba(24,24,24,0.97);
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; align-items: flex-start;
         padding: 65px 20px 24px 28px;
-        width: 100vw;
-        min-width: 180px;
-        z-index: 99;
+        width: 100vw; min-width: 180px; z-index: 99;
         box-shadow: 0 6px 16px #000c;
         transform: translateY(-120%);
         transition: transform .35s cubic-bezier(.61,.11,.45,1.25);
@@ -271,8 +245,8 @@
       }
       .navbar nav.open { transform: translateY(0);}
     }
-
-    /* --- ALL existing styles for cards, hero, grids, modals, section fade-up etc retained as before --- */
+    /* Rest: Instagram, hero, cards, about, why, contact, modals, etc... */
+    .container {max-width: 1200px; margin: 0 auto; padding: 0 1.2rem;}
     .instagram-container { display: flex; align-items: center; justify-content: center; padding: 20px 10px; margin: 24px auto; border-radius: 12px; max-width: 640px; min-height: 360px; box-shadow: 0 0 15px rgba(0,0,0,0.4);}
     .instagram-container > blockquote { margin: auto; width: 100% !important; display: block;}
     .hero { min-height: 430px; display: flex; align-items: center; justify-content: flex-start; border-radius: 13px; box-shadow: 0 6px 30px #e1060044; margin: 36px 0 56px; position: relative; overflow: hidden;}
@@ -287,10 +261,11 @@
     .service-card {
       border-radius: 13px; box-shadow: 0 2px 16px #e1060033; text-align: left; padding: 2.1rem 1.3rem 1.43rem;
       position: relative; background-size: cover; background-position: center; color: #fff; overflow: hidden;
-      min-width: 0; /* mobile fix */
+      min-width: 0;
     }
     .service-card::before {
-      content: ''; position: absolute; inset: 0; background: rgba(0, 0, 0, 0.52); z-index: 0; transition: background 0.3s, opacity 0.2s;
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0, 0, 0, 0.52); z-index: 0; transition: background 0.3s, opacity 0.2s;
     }
     .service-card:hover { box-shadow: 0 18px 45px #e1060061; transform: translateY(-7px) scale(1.045); z-index: 2;}
     .service-card:hover::before { background: rgba(225,6,0,0.38);}
@@ -315,33 +290,28 @@
     .whatsapp_float:hover { background: #128C7E; }
     footer { text-align: center; color: #adadad; padding: 1rem 0 0.6rem; margin-top: 32px; font-size: 1.02rem; letter-spacing: 0.04em;}
     footer a { color: #b38cf6; text-decoration: underline;}
-    /* Policy modals remain as in your original */
     .policy-modal {
-      display: none;
-      position: fixed; z-index: 9999; left: 0; top: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.7);
-      overflow: auto;
+      display: none; position: fixed; z-index: 9999; left: 0; top: 0;
+      width: 100vw; height: 100vh; background: rgba(0,0,0,0.7); overflow: auto;
     }
     .policy-modal .modal-content {
-      background: #181818;
-      margin: 6% auto;
-      padding: 2em 1.2em 1.3em;
-      border-radius: 13px;
-      max-width: 430px; min-width: 250px;
-      color: #fff;
-      position: relative;
-      box-shadow: 0 8px 40px #0008;
+      background: #181818; margin: 6% auto; padding: 2em 1.2em 1.3em; border-radius: 13px;
+      max-width: 430px; min-width: 250px; color: #fff; position: relative; box-shadow: 0 8px 40px #0008;
     }
     .policy-modal .close {
       position: absolute; top: 13px; right: 22px;
       font-size: 2rem; color: #e10600;
-      font-weight: 900; cursor: pointer;
-      z-index: 21; transition: color 0.23s;
+      font-weight: 900; cursor: pointer; z-index: 21; transition: color 0.23s;
     }
     .policy-modal .close:hover { color: #fff; }
     .policy-modal h2 { color: #e10600; margin-top: 0; }
     .policy-modal a { color: #b38cf6; text-decoration: underline; }
+    body.intro-active {
+      overflow: hidden !important;
+      height: 100vh !important;
+      position: fixed !important;
+      width: 100vw;
+    }
   </style>
 </head>
 <body>
@@ -357,7 +327,6 @@
       <span>We</span> <span>make</span> <span>your</span> <span>path</span> <span>easier</span>
     </div>
   </div>
-
   <header>
     <div class="navbar container">
       <img src="https://i.ibb.co/gbRG0KyK/01-2.png" alt="Moto Monkeyz Logo" class="logo">
@@ -375,7 +344,6 @@
       </nav>
     </div>
   </header>
-
   <!-- HERO BANNER -->
   <section class="hero container" id="home">
     <div class="hero-content">
@@ -482,22 +450,21 @@
     <div class="modal-content">
       <span class="close" onclick="closeModal('modal-privacy')">&times;</span>
       <h2>Privacy Policy</h2>
-      <!-- ... Privacy Policy content ... -->
-      <p><strong>Moto Monkeyz</strong> (“we,” “our,” or “us”) is committed to protecting the privacy and security of your personal information. ...</p>
+      <p><strong>Moto Monkeyz</strong> (“we,” “our,” or “us”) is committed to protecting the privacy and security of your personal information. We never sell your data and only use it to provide excellent service. Details are available on request.</p>
     </div>
   </div>
   <div id="modal-terms" class="policy-modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('modal-terms')">&times;</span>
       <h2>Terms &amp; Conditions</h2>
-      <!-- ... Terms Modal Content ... -->
+      <p>All offers, deals, and listings are subject to confirmation and terms. Please reach out for detailed terms pertaining to any transaction. Your use of this site implies acceptance of these terms.</p>
     </div>
   </div>
   <div id="modal-refund" class="policy-modal">
     <div class="modal-content">
       <span class="close" onclick="closeModal('modal-refund')">&times;</span>
       <h2>Refund &amp; Cancellation</h2>
-      <!-- ... Refund Modal Content ... -->
+      <p>Cancellation and refund policies depend on the service rendered. For refund or cancellation of car purchases or accessories, please contact Moto Monkeyz directly with your request.</p>
     </div>
   </div>
   <!-- Footer -->
@@ -507,9 +474,9 @@
     <a href="javascript:void(0)" onclick="openModal('modal-terms')">Terms &amp; Conditions</a> |
     <a href="javascript:void(0)" onclick="openModal('modal-refund')">Refund &amp; Cancellation</a>
   </footer>
-  <!-- JS for intro, scroll, nav, modal actions -->
   <script>
     window.onload = function() {
+      document.body.classList.add('intro-active');
       // Section and fade-up reveal
       function revealOnScroll(sel) {
         const els = document.querySelectorAll(sel);
@@ -539,6 +506,8 @@
       setTimeout(function(){
         const overlay = document.getElementById('intro-overlay');
         if(overlay) overlay.style.display = 'none';
+        document.body.classList.remove('intro-active');
+        window.scrollTo(0,0);
       }, 2500);
       // NAV active on scroll
       const navLinks = document.querySelectorAll('.navbar nav a');
@@ -589,7 +558,6 @@
         });
       }
     };
-    // Modal functions
     function openModal(id) {
       document.getElementById(id).style.display = 'block';
     }
@@ -602,7 +570,6 @@
         if(event.target === modal) modal.style.display = "none";
       });
     };
-    // Hamburger Nav
     document.addEventListener('DOMContentLoaded', function(){
       const navToggle = document.querySelector('.nav-toggle');
       const navMenu = document.querySelector('.navbar nav');
