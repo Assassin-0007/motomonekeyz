@@ -311,6 +311,65 @@ body.menu-open { overflow: hidden; }
   opacity: 0.85;
   z-index: 2;
 }
+@media (max-width: 920px) {
+  .navbar nav {
+    position: absolute;
+    top: 100%;           /* Directly below .navbar (the header) */
+    left: 0; right: 0;
+    background: rgba(24,24,24,0.97);
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    min-width: 180px;
+    z-index: 99;
+    box-shadow: 0 6px 16px #000c;
+    transform: translateY(-120%);
+    transition: transform .35s cubic-bezier(.61,.11,.45,1.25);
+    height: auto;
+    padding: 20px 20px 24px 28px;  /* reduce top padding, fit below header */
+    border-radius: 0 0 10px 10px;
+  }
+  .navbar nav.open {
+    transform: translateY(0);
+    display: flex;
+  }
+  .nav-toggle {
+    display: flex !important;
+    position: absolute;
+    top: 0.2rem;
+    right: 1.5rem;
+    z-index: 100;
+  }
+}
+
+
+
+  .navbar nav.open {
+    transform: translateY(0);
+    display: flex;
+  }
+}
+.nav-toggle {
+  display: flex !important;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  z-index: 100;
+}
+
+
+@media (max-width: 600px) {
+  .container { padding: 0 8px; }
+  .services, .about, .why-choose-us, .contact { margin: 18px 0; }
+  .hero-content h1 { font-size: 1.4rem; }
+  .hero-content p { font-size: 0.97rem; }
+  .service-grid { grid-template-columns: 1fr; gap: 0.83rem; }
+  .cta-btn { padding: 0.8rem 1.4rem; font-size: 1rem;}
+  .service-card { min-width: 0; }
+  .policy-modal .modal-content { max-width: 99vw; min-width: 0; padding: 1em 0.7em 1em;}
+  .whatsapp_float { right: 9px; bottom: 9px; width: 47px; height: 47px; font-size: 22px;}
+}
+
 
   </style>
 
